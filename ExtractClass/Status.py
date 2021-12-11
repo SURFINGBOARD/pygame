@@ -7,11 +7,12 @@ blood
 """
 
 class Status():
-    def __init__(self, blood=3, speed=10, score=0, hurt=False):
+    def __init__(self, blood=3, speed=10, score=0, hurt=False, dead=False):
         self.blood = blood  # at beginning: main role own 6 blood at, common monster own 3 blood, boos maybe role.blood multiple 10 times
         self.speed = speed
         self.score = score  # get 1 score when killing a monster
         self.hurt = hurt    # get hurt: True, not hurt: False
+        self.dead = dead    # dead: True, alive: False
 
     # different roles have different movement speed
     # easy to add pick up items function
@@ -31,3 +32,7 @@ class Status():
     def bleed(self):
         if self.hurt:   # get attack, hurt change to True, then blood-1
             self.blood -= 1
+
+    def dead(self):
+        if self.blood == 0:
+            self.dead = True
