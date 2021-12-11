@@ -32,15 +32,15 @@ class Role():
         # keyboard event long-press
         self.long_press = 0
 
-        def press_move(self):
-            self.long_press += 1
-            self.pic_count = 0
-            self.run += 1
+    def press_move(self):
+        self.long_press += 1
+        self.pic_count = 0
+        self.run += 1
 
-        def release_move(self):
-            self.long_press -= 1
-            self.pic_count = 0
-            self.run -= 1
+    def release_move(self):
+        self.long_press -= 1
+        self.pic_count = 0
+        self.run -= 1
 
     def read_event(self, event):
         if event.type == pygame.KEYDOWN:
