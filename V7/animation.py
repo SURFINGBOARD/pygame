@@ -14,10 +14,14 @@ import pygame
 
 
 class picToAnim(obj.obj):
-    def __init__(self, x, y, pic_group, pic, howmany):
+    def __init__(self, x, y, pic_group, pic, rgb, howmany, m, n, exchange=False):
         super().__init__(x, y, pic_group, pic)
         self.howmany = howmany
         self.pic = pic
+        self.rgb = rgb
+        self.m, self.n = m, n
+        self.killing = False
+        self.exchange = exchange
         
     def update(self, count, pos1):
         # get coordinate as a tuple based on bk map, x:pos[0],y:pos[1]
@@ -27,7 +31,12 @@ class picToAnim(obj.obj):
                 self.undo_update_pos()
         # update the 16 pixel as a picture per frame
         if count % 8 == 0:
-            self.image = tools.get_image(self.PIC[self.pic], self.pic_count * 16, 0, 16, 16, (255, 255, 255), self.size)
+            if self.exchange == False:
+                self.image = tools.get_image(self.PIC[self.pic], self.pic_count * self.m, 0, self.m, self.n, self.rgb, self.size)
+            else:
+                self.image = tools.get_image(self.PIC[self.pic], 0, self.pic_count * self.m, self.m, self.n, self.rgb, self.size)
             self.pic_count = tools.animation_change_pic(self.pic_count, self.howmany)
+            if self.pic_count == 0:
+                self.killing = True
         self.rect.x = self.x
         self.rect.y = self.y
