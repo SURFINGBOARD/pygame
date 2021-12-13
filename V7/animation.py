@@ -27,7 +27,7 @@ class picToAnim(obj.obj):
                 self.undo_update_pos()
         # update the 16 pixel as a picture per frame
         if count % 8 == 0:
-            self.image = tools.get_image(self.PIC[self.pic], (5 - self.pic_count) * 16, 0, 16, 16, (255, 255, 255), self.size)
+            self.image = tools.get_image(self.PIC[self.pic], self.pic_count * 16, 0, 16, 16, (255, 255, 255), self.size)
             self.pic_count = tools.animation_change_pic(self.pic_count, self.howmany)
         self.rect.x = self.x
         self.rect.y = self.y
